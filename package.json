@@ -1,0 +1,12 @@
+{
+  "name": "auth0-ai-agent-security-suite",
+  "version": "1.0.0",
+  "description": "Full-stack Auth0 for AI Agents suite: Universal Login PKCE, Context-Preserving Assistant with Token Vault, CIBA Asynchronous Veto Agent, and Auth0 FGA Privacy-Aware RAG Bot",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.mjs",
+    "test": "node src/server.mjs --verify"
+  },
+  "author": "Prince Jain",
+  "license": "MIT"
+}
