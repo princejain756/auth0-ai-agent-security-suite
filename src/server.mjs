@@ -85,7 +85,7 @@ if (process.argv.includes("--verify")) {
   process.exit(0);
 }
 
-const server = http.createServer(async (req, res) => {
+export async function requestHandler(req, res) {
   if (req.url === "/api/verify") {
     const data = await runFullSuiteVerification();
     res.writeHead(200, { "content-type": "application/json" });
@@ -121,7 +121,7 @@ const server = http.createServer(async (req, res) => {
         Universal Login, Token Vault, CIBA Veto Agent & Auth0 FGA RAG Suite
       </h1>
       <p style="font-size:12.5px;color:#94a3b8;margin-top:4px;">
-        Authenticated Subject: <code>${data.universalLogin.session.sub}</code> (${data.universalLogin.session.email}) · PKCE S256 Verified
+        Authenticated Subject: <code>${data.universalLogin.session.sub}</code> (${data.universalLogin.session.email}) · PKCE S256 Verified · Live at auth0-agents.prince.sh
       </p>
     </div>
     <div style="font-family:monospace;font-size:12px;color:#34d399;border:1px solid #10b981;padding:6px 12px;border-radius:8px;">
@@ -185,8 +185,10 @@ const server = http.createServer(async (req, res) => {
   </div>
 </body>
 </html>`);
-});
+}
 
-server.listen(PORT, () => {
-  console.log(`Auth0 AI Agent Security Suite running at http://localhost:${PORT}`);
-});
+if (import.meta.url === `file://${process.argv[1]}`) {
+  http.createServer(requestHandler).listen(PORT, () => {
+    console.log(`Auth0 AI Agent Security Suite running at http://localhost:${PORT}`);
+  });
+}
