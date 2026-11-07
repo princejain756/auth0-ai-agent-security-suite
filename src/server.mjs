@@ -187,6 +187,8 @@ export async function requestHandler(req, res) {
 </html>`);
 }
 
+export default requestHandler;
+
 if (import.meta.url === `file://${process.argv[1]}`) {
   http.createServer(requestHandler).listen(PORT, () => {
     console.log(`Auth0 AI Agent Security Suite running at http://localhost:${PORT}`);
